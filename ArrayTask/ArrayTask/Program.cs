@@ -70,7 +70,7 @@ namespace ArrayTask
                 arrCount[arr4[i]]++;
 
             for (int i = 0; i < arrCount.Length; i++)
-                if(arrCount[i] != 0)
+                if(arrCount[i] > 1)
                     Console.WriteLine("{0} is {1} times", i, arrCount[i]);
 
             Console.WriteLine("\n");
