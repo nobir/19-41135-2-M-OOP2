@@ -77,10 +77,10 @@ namespace ArrayTask
 
 
             /**
-             * Find the uniqe
+             * Find the unique
              */
 
-            Console.WriteLine("#  Finding Uniq  #");
+            Console.WriteLine("#  Finding Unique  #");
 
             for (int i = 0; i < arrCount.Length; i++)
                 if (arrCount[i] == 1)
