@@ -8,31 +8,50 @@ namespace Inheritance
 {
     class Fixed : Account
     {
-        int tenureYear = 5, year;
+        private int tenureYear = 5;
+        private int year;
 
         public Fixed() { }
-        public Fixed(string accName, string accid, int balance, int year)
-            : base(accName, accid, balance)
+        public Fixed(string accName, string accid, int balance, int year): base(accName, accid, balance)
         {
-            this.year = year;
+            this.Year = year;
         }
 
-        new public void Withdraw(int amount)
+        public int Year
+        {
+            set { this.year = value; }
+            get { return this.year; }
+        }
+
+        public override void Withdraw(int amount)
         {
             if (tenureYear == this.year)
+            {
                 base.Withdraw(amount);
+            }
             else
-                Console.WriteLine("Account need to mature."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: Account is not mature!!");
+                Console.WriteLine();
+            }
         }
 
-        new public void Deposit(int amount) { base.Deposit(amount); }
+        public override void Deposit(int amount)
+        {
+            base.Deposit(amount);
+        }
 
-        new public void Transfer(int amount, Account acc)
+        public override void Transfer(int amount, Account acc)
         {
             if (tenureYear == this.year)
+            {
                 base.Transfer(amount, acc);
+            }
             else
-                Console.WriteLine("Account need to mature."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: Account is not mature!!");
+                Console.WriteLine();
+            }
         }
     }
 }

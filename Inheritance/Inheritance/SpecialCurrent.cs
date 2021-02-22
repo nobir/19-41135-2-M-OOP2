@@ -8,32 +8,55 @@ namespace Inheritance
 {
     class SpecialCurrent : Account
     {
-        int openingBalabce, minBalance;
+        private int openingBalance;
+        private int minBalance;
 
         public SpecialCurrent() { }
         public SpecialCurrent(string accName, string accid, int balance)
             : base(accName, accid, balance)
         {
-            openingBalabce = balance;
-            minBalance = (openingBalabce * 10) / 100;
+            this.OpeningBalance = balance;
+            minBalance = (openingBalance * 10) / 100;
+        }
+        public int OpeningBalance
+        {
+            set { this.openingBalance = value; }
+            get { return this.openingBalance; }
+        }
+        public int MinBalance
+        {
+            get { return this.minBalance; }
         }
 
-        new public void Withdraw(int amount)
+        public override void Withdraw(int amount)
         {
-            if ((base.Balance - amount) >= minBalance)
+            if (this.MinBalance < this.Balance - amount)
+            {
                 base.Withdraw(amount);
+            }
             else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
         }
 
-        new public void Deposit(int amount) { base.Deposit(amount); }
-
-        new public void Transfer(int amount, Account acc)
+        public override void Deposit(int amount)
         {
-            if ((base.Balance - amount) >= minBalance)
+            base.Deposit(amount);
+        }
+
+        public override void Transfer(int amount, Account acc)
+        {
+            if (this.MinBalance < base.Balance - amount)
+            {
                 base.Transfer(amount, acc);
+            }
             else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
         }
     }
 }

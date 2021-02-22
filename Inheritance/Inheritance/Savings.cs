@@ -8,26 +8,41 @@ namespace Inheritance
 {
     class Savings : Account
     {
-        int minBalance = 430;
+        private int minBalance = 430;
         public Savings() { }
         public Savings(string accName, string accid, int balance) : base(accName, accid, balance) { }
 
-        new public void Withdraw(int amount)
+        public int MinBalance
         {
-            if ((base.Balance - amount) >= minBalance)
-                base.Withdraw(amount);
-            else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            get { return this.minBalance; }
         }
 
-        new public void Deposit(int amount) { base.Deposit(amount); }
-
-        new public void Transfer(int amount, Account acc)
+        public override void Withdraw(int amount)
         {
-            if ((base.Balance - amount) >= minBalance)
-                base.Transfer(amount, acc);
+            if (this.MinBalance < this.Balance - amount)
+            {
+                base.Withdraw(amount);
+            }
             else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
+        }
+
+        public override void Deposit(int amount) { base.Deposit(amount); }
+
+        public override void Transfer(int amount, Account acc)
+        {
+            if (this.MinBalance < base.Balance - amount)
+            {
+                base.Transfer(amount, acc);
+            }
+            else
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
         }
     }
 }

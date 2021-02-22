@@ -8,31 +8,48 @@ namespace Inheritance
 {
     class OverDraft : Account
     {
-        int limit = 50000;
+        private int limit = 50000;
 
         public OverDraft() { }
-        public OverDraft(string accName, string accid, int balance)
-            : base(accName, accid, balance)
+        public OverDraft(string accName, string accid, int balance): base(accName, accid, balance)
         {
-            base.Balance = balance + limit;
+            base.Balance = balance + this.Limit;
         }
 
-        new public void Withdraw(int amount)
+        public int Limit
         {
-            if (base.Balance >= amount)
+            get { return this.limit; }
+        }
+
+        public override void Withdraw(int amount)
+        {
+            if (this.Balance >= amount)
+            {
                 base.Withdraw(amount);
+            }
             else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
         }
 
-        new public void Deposit(int amount) { base.Deposit(amount); }
+        public override void Deposit(int amount)
+        {
+            base.Deposit(amount);
+        }
 
-        new public void Transfer(int amount, Account acc)
+        public override void Transfer(int amount, Account acc)
         {
             if (base.Balance >= amount)
+            {
                 base.Transfer(amount, acc);
+            }
             else
-                Console.WriteLine("Insaficient Balance."); Console.WriteLine();
+            {
+                Console.WriteLine("[Error]: You've exceed your minimum balance!!");
+                Console.WriteLine();
+            }
         }
     }
 }
