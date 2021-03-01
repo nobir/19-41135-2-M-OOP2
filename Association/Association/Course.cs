@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Association
 {
-    class Department
+    class Course
     {
         private string id;
         private string name;
 
-        private int studentCount; // default value is 0
+        private int studentCount;
         private Student[] students;
 
-        public Department()
+        public Course()
         {
-            students = new Student[50];
+            this.students = new Student[10];
         }
 
-        public Department(string id, string name)
+        public Course(string id, string name)
         {
-            this.Name = name;
             this.Id = id;
-            students = new Student[50];
+            this.Name = name;
+            this.students = new Student[10];
         }
 
         public string Id
@@ -49,7 +49,8 @@ namespace Association
             foreach (Student s in stdns)
             {
                 this.students[this.StudentCount++] = s;
-                s.Dept = this;
+                if(s.GetCourse(this.Id) == null)
+                    s.AddCourse(this);
             }
         }
 
@@ -63,7 +64,7 @@ namespace Association
             }
 
             bool notFound = true;
-            for(int i = 0; i < this.StudentCount - 1; ++i)
+            for (int i = 0; i < this.StudentCount - 1; ++i)
             {
                 if (s == this.students[i] && notFound)
                 {
@@ -73,11 +74,10 @@ namespace Association
 
                 if (!notFound)
                     this.students[i] = this.students[i + 1];
-                
+
             }
         }
         */
-
         public Student GetStudent(string id)
         {
             for (int i = 0; i < this.StudentCount; ++i)
@@ -95,10 +95,10 @@ namespace Association
             }
         }
 
-        public void ShowInfo()
+        public void ShowCourseInfo()
         {
-            Console.WriteLine("Department Id: {0}", this.Id);
-            Console.WriteLine("Department Name: {0}", this.Name);
+            Console.WriteLine("Course Name: {0}", this.Name);
+            Console.WriteLine("Course ID: {0}", this.Id);
         }
     }
 }

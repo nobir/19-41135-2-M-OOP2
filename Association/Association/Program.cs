@@ -50,6 +50,31 @@ namespace Association
             d1.AddStudent(s2);
 
             d1.PrintStudent();
+
+            /**
+             * Many to Many Association
+             */
+
+            Course c1 = new Course("mat101", "Math 1");
+            Course c2 = new Course("mat102", "Math 2");
+            Course c3 = new Course("mat103", "Math 3");
+            Course c4 = new Course("mat104", "Math 4");
+
+            Student s4 = new Student("213", "Nobir 4", 3.8F);
+            Student s5 = new Student("231", "Nobir 5", 2.85F);
+            Student s6 = new Student("312", "Nobir 6", 3.83F);
+            Student s7 = new Student("321", "Nobir 7", 3.82F);
+            Student s8 = new Student("341", "Nobir 8", 3.86F);
+            Student s9 = new Student("512", "Nobir 9", 3.81F);
+
+            c1.AddStudent(s1, s2, s3, s4);
+            c2.AddStudent(s1, s6, s3, s8, s9);
+
+            c1.PrintStudent();
+            c2.PrintStudent();
+
+            s1.PrintCourse();
+            s3.PrintCourse();
         }
     }
 }
