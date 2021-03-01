@@ -48,6 +48,8 @@ namespace Association
 
             d1.AddStudent(s1);
             d1.AddStudent(s2);
+
+            d1.PrintStudent();
         }
     }
 }
